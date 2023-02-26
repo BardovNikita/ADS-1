@@ -4,44 +4,45 @@
 
 
 bool checkPrime(uint64_t value) {
-  if (value <= 1)
-    return false;
-  for (uint64_t i = 2; i <= sqrt(value); i++) {
-    if (value % i == 0)
-      return false;
+    if (value <= 1)
+        return false;
+    for (int i = 2; i * i <= value; i++) {
+        if (value % i == 0)
+            return false;
     }
-  return true;
+    return true;
 }
 
 uint64_t nPrime(uint64_t n) {
-  uint64_t num = 0;
-  uint64_t res = 0;
-  while (n > 0) { 
-    if (checkPrime(num)) {
-      res = num;
-      —n;
-      }
-    ++num;
+    uint64_t num = 0;
+    uint64_t number = 0;
+    while (n > 0) {
+        if (checkPrime(num) == 1) {
+            number = num;
+            --n;
+        }
+        ++num;
     }
-  return res;
+    return number;
 }
 
 uint64_t nextPrime(uint64_t value) {
-  while (true) {
-    ++value;
-    if (checkPrime(value)) {
-      return value;
-      }
+    while (true) {
+        value++;
+        if (checkPrime(value)) {
+            return value;
+        }
     }
 }
 
 uint64_t sumPrime(uint64_t hbound) {
-  uint64_t sum = 0;
-  for (int i = 0; i < hbound; i++)
-    {
-    if (checkPrime(i)) {
-      sum += i;
-      }
+    uint64_t sum = 0;
+    hbound = hbound - 1;
+    while (hbound > 0) {
+        if (checkPrime(hbound)) {
+            sum += hbound;
+        }
+        --hbound;
     }
-  return sum;
+    return sum;
 }
